@@ -1,32 +1,54 @@
 /* A standard layout for the Dactyl Manuform 5x6 Keyboard */
 #include QMK_KEYBOARD_H
 
-#define _NORMAL_KEYBOARD      0
-#define _RIGHT_FUNCTIONS      1
-#define _LEFT_FUNCTIONS       2
-#define _RGB_FUNCTIONS        3
-#define _NUMPAD_FUNCTIONS     4
-#define _MOUSE_FUNCTIONS      5
-#define _NAVIGATION_FUNCTIONS 6
+#define _NORMAL_KEYBOARD		0
+#define _RIGHT_FUNCTIONS		1
+#define _LEFT_FUNCTIONS			2
+#define _RGB_FUNCTIONS			3
+#define _NUMPAD_FUNCTIONS		4
+#define _MOUSE_FUNCTIONS		5
+#define _NAVIGATION_RIGHT_FUNCTIONS	6
+#define _NAVIGATION_LEFT_FUNCTIONS	7
+#define _SYMBOL_RIGHT_FUNCTIONS		8
+#define _SYMBOL_LEFT_FUNCTIONS		9
+#define _UMLAUT_LEFT_FUNCTIONS		10
+#define _UMLAUT_RIGHT_FUNCTIONS		11
+#define _NUMBER_ROW_RIGHT_FUNCTIONS	12
+#define _NUMBER_ROW_LEFT_FUNCTIONS	13
+#define _F_KEYS_LEFT_FUNCTIONS		14
+#define _F_KEYS_RIGHT_FUNCTIONS		15
+#define _STAR_FUNCTIONS			16
 
-#define L_RGHT   MO(_RIGHT_FUNCTIONS)
-#define L_LFT    MO(_LEFT_FUNCTIONS)
-#define L_RGB    MO(_RGB_FUNCTIONS)
-#define L_NUM    MO(_NUMPAD_FUNCTIONS)
-#define L_MOUSE  MO(_MOUSE_FUNCTIONS)
-#define L_NAV    MO(_NAVIGATION_FUNCTIONS)
+#define L_RGHT		_RIGHT_FUNCTIONS
+#define L_LFT		_LEFT_FUNCTIONS
+#define L_RGB		_RGB_FUNCTIONS
+#define L_NUM		_NUMPAD_FUNCTIONS
+#define L_MOUSE		_MOUSE_FUNCTIONS
+#define L_NAV_R		_NAVIGATION_RIGHT_FUNCTIONS
+#define L_NAV_L		_NAVIGATION_LEFT_FUNCTIONS
+#define L_SYMB_R	_SYMBOL_RIGHT_FUNCTIONS
+#define L_SYMB_L	_SYMBOL_LEFT_FUNCTIONS
+#define L_UML_L		_UMLAUT_LEFT_FUNCTIONS
+#define L_UML_R		_UMLAUT_RIGHT_FUNCTIONS
+#define L_NUM_R		_NUMBER_ROW_RIGHT_FUNCTIONS
+#define L_NUM_L		_NUMBER_ROW_LEFT_FUNCTIONS
+#define L_F_R		_F_KEYS_RIGHT_FUNCTIONS
+#define L_F_L		_F_KEYS_LEFT_FUNCTIONS
+#define L_STAR		_STAR_FUNCTIONS
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NORMAL_KEYBOARD] = LAYOUT(
-    KC_Q,         KC_W,              KC_E,            KC_R,    KC_T,                            KC_Y,            KC_U,    KC_I,            KC_O,    KC_P,
-    LSFT_T(KC_A), LT(L_MOUSE, KC_S), LT(L_NAV, KC_D), KC_F,    KC_G,                            LT(L_RGB, KC_H), KC_J,    KC_K,            KC_L,    LSFT_T(KC_SCLN),
-    LCTL_T(KC_Z), KC_X,              KC_C,            KC_V,    KC_B,                            KC_N,            KC_M,    LALT_T(KC_COMM), KC_DOT,  RCTL_T(KC_SLSH),
-                  KC_NUBS,           KC_GRV,          KC_LALT,                                                   KC_RALT, KC_RBRC,         KC_NO,
-                                                               KC_SPC,                          KC_ENTER,
-                                                               KC_LSFT, KC_LGUI,          KC_NO, KC_RSFT
+    KC_Q,         KC_W,              KC_E,            KC_R,    KC_T,                                              KC_Y,              KC_U,    KC_I,            KC_O,    KC_P,
+    LT(L_NUM_R, KC_A), LT(L_MOUSE, KC_S), LT(L_NAV_R, KC_D), LT(L_SYMB_R, KC_F), LT(L_UML_R, KC_G),            LT(L_UML_L, KC_H), LT(L_SYMB_L, KC_J), LT(L_NAV_L, KC_K), LT(L_NUM, KC_L), LT(L_NUM_L, KC_NUHS),
+    LCTL_T(KC_Z), KC_X,              KC_C,            KC_V,    LT(L_F_R, KC_B),                                              LT(L_F_R, KC_N),              KC_M,    LALT_T(KC_COMM), KC_DOT,  RCTL_T(KC_SLSH),
+                  KC_NUBS,           KC_GRV,          KC_LALT,                                                                       KC_RALT, LT(L_RGB, KC_RBRC),         KC_MINS,
+                                                               KC_SPC,                                            KC_ENTER,
+                                                               KC_LSFT, KC_LGUI,                      MO(L_STAR), KC_RSFT
   ),
+
+
 
   [_RGB_FUNCTIONS] = LAYOUT(
     RGB_M_R, RGB_M_B, RGB_M_K, RGB_M_X , RGB_M_G,			    RGB_M_SW, RGB_M_SN, KC_NO  , KC_NO  , KC_NO,
@@ -46,22 +68,105 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         KC_TRNS,                            KC_TRNS,
 					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
   ),
-  [_NAVIGATION_FUNCTIONS] = LAYOUT(
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS       , KC_TRNS,                     KC_TRNS, KC_TRNS, KC_PGUP, KC_TRNS, KC_TRNS,
+  [_NAVIGATION_RIGHT_FUNCTIONS] = LAYOUT(
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS       , KC_TRNS,                     KC_TRNS, KC_TRNS, KC_PGUP, KC_TRNS, KC_BSPC,
     KC_TRNS, KC_LGUI, KC_NO  , LCTL(KC_LALT) , LCA(KC_LSFT),                KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS       , KC_TRNS,                     KC_TRNS, KC_HOME, KC_PGDN, KC_END , KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS       ,                                       KC_DEL , KC_TRNS, KC_TRNS,
+                                               KC_TRNS,                     KC_BSPC,
+					       KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS
+),
+  [_NAVIGATION_LEFT_FUNCTIONS] = LAYOUT(
+    KC_ESC, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_NO  , KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS,                                             KC_DEL , KC_TRNS, KC_TRNS,
+                                        KC_TAB,                             KC_BSPC,
+				        KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+),
+  [_SYMBOL_RIGHT_FUNCTIONS] = LAYOUT(
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_NO  , KC_TRNS,                            KC_TRNS, KC_LCBR, KC_LBRC, KC_RBRC, KC_RCBR,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
              KC_TRNS, KC_TRNS, KC_TRNS       ,                                       KC_TRNS, KC_TRNS, KC_TRNS,
                                                KC_TRNS,                     KC_TRNS,
 					       KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS
 ),
-  [1] = LAYOUT(
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_UNDS, KC_PIPE, KC_QUOT, KC_TRNS,
-    KC_CIRC, KC_ASTR, KC_AMPR, KC_NO  , KC_TRNS,                            KC_HASH, KC_TILD, KC_SLSH, KC_DQUO, KC_DLR,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_MINS, KC_BSLS, KC_GRV , KC_TRNS,
-             KC_TRNS, KC_TRNS, KC_TRNS       ,                                       KC_TRNS, KC_TRNS, KC_TRNS,
-                                               KC_TRNS,                     KC_TRNS,
-					       KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS
+  [_SYMBOL_LEFT_FUNCTIONS] = LAYOUT(
+    KC_EXLM    , KC_AT      , KC_HASH    , KC_DLR     , KC_PERC,                     KC_CIRC    , KC_AMPR, KC_ASTR    , KC_LPRN    , KC_RPRN    ,
+    RSA_T(KC_1), RSA_T(KC_2), RSA_T(KC_3), RSA_T(KC_4), RSA_T(KC_5),                 RSA_T(KC_6), KC_NO  , RSA_T(KC_8), RSA_T(KC_9), RSA_T(KC_0),
+    KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS,                     KC_TRNS    , KC_TRNS, KC_TRNS    , KC_TRNS    , KC_TRNS    ,
+                 KC_TRNS    , KC_TRNS    , KC_TRNS    ,                                           KC_TRNS, KC_TRNS    , KC_TRNS    ,
+                                                        KC_TRNS,                     KC_TRNS,
+					                KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS
 ),
+
+  [_UMLAUT_LEFT_FUNCTIONS] = LAYOUT(
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_LBRC, KC_TRNS, KC_SCLN, KC_TRNS,
+    KC_QUOT, KC_MINS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_NO  , KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
+                                        KC_TRNS,                            KC_TRNS,
+					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+  ),
+  [_UMLAUT_RIGHT_FUNCTIONS] = LAYOUT(
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_LBRC, KC_TRNS, KC_SCLN, KC_TRNS,
+    KC_QUOT, KC_MINS, KC_TRNS, KC_TRNS, KC_NO  ,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
+                                        KC_TRNS,                            KC_TRNS,
+					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+  ),
+
+  [_NUMBER_ROW_LEFT_FUNCTIONS] = LAYOUT(
+    KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                            KC_6   , KC_7   , KC_8   , KC_9   , KC_0   ,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO  ,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
+                                        KC_TRNS,                            KC_TRNS,
+					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+  ),
+  [_NUMBER_ROW_RIGHT_FUNCTIONS] = LAYOUT(
+    KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                            KC_6   , KC_7   , KC_8   , KC_9   , KC_0   ,
+    KC_NO  , KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
+                                        KC_TRNS,                            KC_TRNS,
+					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+  ),
+  [_NUMPAD_FUNCTIONS] = LAYOUT(
+    KC_TRNS, KC_7   , KC_8   , KC_9   , KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_4   , KC_5   , KC_6   , KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_1   , KC_2   , KC_3   , KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_0   , KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
+                                        KC_TRNS,                            KC_TRNS,
+					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+  ),
+
+  [_F_KEYS_LEFT_FUNCTIONS] = LAYOUT(
+    KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                            KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 ,
+    KC_F11 , KC_F12 , KC_F13 , KC_F14 , KC_F15 ,                            KC_F16 , KC_F17 , KC_F18 , KC_F19 , KC_F20 ,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
+                                        KC_TRNS,                            KC_TRNS,
+					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+  ),
+  [_F_KEYS_RIGHT_FUNCTIONS] = LAYOUT(
+    KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                            KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 ,
+    KC_F11 , KC_F12 , KC_F13 , KC_F14 , KC_F15 ,                            KC_F16 , KC_F17 , KC_F18 , KC_F19 , KC_F20 ,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,                              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+             KC_TRNS, KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
+                                        KC_TRNS,                            KC_TRNS,
+					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+  ),
+  [_STAR_FUNCTIONS] = LAYOUT(
+    SGUI(KC_1) , SGUI(KC_2) , SGUI(KC_3) , SGUI(KC_4) , SGUI(KC_5) ,                              SGUI(KC_6) , SGUI(KC_7) , SGUI(KC_8) , SGUI(KC_9) , SGUI(KC_0),
+    SGUI(KC_F1), SGUI(KC_F2), SGUI(KC_F3), SGUI(KC_F4), SGUI(KC_F5),                              SGUI(KC_F6), SGUI(KC_F7), SGUI(KC_F8), SGUI(KC_F9), SGUI(KC_F10),
+    KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS    ,                              KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS    ,
+                 KC_TRNS    , KC_TRNS    , KC_TRNS    ,                                                        KC_TRNS    , KC_TRNS    , KC_TRNS    ,
+                                           KC_ESC     ,                                                        KC_TRNS    ,
+					   KC_ENTER   , KC_TRNS    ,                                   KC_NO,  KC_TRNS
+  ),
     /**     ["KC_TRNS"     , "KC_COLN"     , "KC_LT"          , "KC_GT"         , "KC_SCLN", */
     /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
     /**  */
