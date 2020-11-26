@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define PRODUCT		Eugens D42
+#define PRODUCT		ErgoSplit-Doehring-42
 
 /* key matrix size */
 // Rows are doubled-up
@@ -51,6 +51,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* number of backlight levels */
 // #define BACKLIGHT_LEVELS 3
-#define TAPPING_TERM 300
+#define TAPPING_TERM 200
+#define TAPPING_TERM_PER_KEY
+
 #define PERMISSIVE_HOLD
 #define IGNORE_MOD_TAP_INTERRUPT
+

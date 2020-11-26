@@ -1,6 +1,7 @@
 /* A standard layout for the Dactyl Manuform 5x6 Keyboard */
 #include QMK_KEYBOARD_H
 
+
 #define _NORMAL_KEYBOARD		0
 #define _RIGHT_FUNCTIONS		1
 #define _LEFT_FUNCTIONS			2
@@ -40,15 +41,13 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NORMAL_KEYBOARD] = LAYOUT(
-    KC_Q,         KC_W,              KC_E,            KC_R,    KC_T,                                              KC_Y,              KC_U,    KC_I,            KC_O,    KC_P,
-    LT(L_NUM_R, KC_A), LT(L_MOUSE, KC_S), LT(L_NAV_R, KC_D), LT(L_SYMB_R, KC_F), LT(L_UML_R, KC_G),            LT(L_UML_L, KC_H), LT(L_SYMB_L, KC_J), LT(L_NAV_L, KC_K), LT(L_NUM, KC_L), LT(L_NUM_L, KC_NUHS),
-    LCTL_T(KC_Z), KC_X,              KC_C,            KC_V,    LT(L_F_R, KC_B),                                              LT(L_F_R, KC_N),              KC_M,    LALT_T(KC_COMM), KC_DOT,  RCTL_T(KC_SLSH),
-                  KC_NUBS,           KC_GRV,          KC_LALT,                                                                       KC_RALT, LT(L_RGB, KC_RBRC),         KC_MINS,
-                                                               KC_SPC,                                            KC_ENTER,
-                                                               KC_LSFT, KC_LGUI,                      MO(L_STAR), KC_RSFT
+    KC_Q,              KC_W,              KC_E,              KC_R,               KC_T,                            KC_Y,              KC_U,               KC_I,               KC_O,            KC_P,
+    LT(L_NUM_R, KC_A), LT(L_MOUSE, KC_S), LT(L_NAV_R, KC_D), LT(L_SYMB_R, KC_F), LT(L_UML_R, KC_G),               LT(L_UML_L, KC_H), LT(L_SYMB_L, KC_J), LT(L_NAV_L, KC_K),  LT(L_NUM, KC_L), LT(L_NUM_L, KC_NUHS),
+    LCTL_T(KC_Z),      KC_X,              KC_C,              KC_V,               LT(L_F_R, KC_B),                 LT(L_F_R, KC_N)  , KC_M,               LALT_T(KC_COMM),    KC_DOT,          RCTL_T(KC_SLSH),
+                       KC_NUBS,           KC_GRV,            KC_LALT,                                                                RALT_T(KC_EQL), LT(L_RGB, KC_RBRC), KC_MINS,
+                                                                                 KC_SPC,                          KC_ENTER,
+                                                                                 KC_LSFT, KC_LGUI,     MO(L_STAR), KC_RSFT
   ),
-
-
 
   [_RGB_FUNCTIONS] = LAYOUT(
     RGB_M_R, RGB_M_B, RGB_M_K, RGB_M_X , RGB_M_G,			    RGB_M_SW, RGB_M_SN, KC_NO  , KC_NO  , KC_NO,
@@ -65,8 +64,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_NO  , KC_TRNS, KC_TRNS, KC_TRNS,                            KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_WH_L, KC_WH_D, KC_WH_R, KC_TRNS,
              KC_TRNS, KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS, KC_TRNS,
-                                        KC_TRNS,                            KC_TRNS,
-					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
+                                        KC_TRNS,                            KC_BTN1,
+					KC_TRNS, KC_TRNS,          KC_BTN2, KC_BTN3
   ),
   [_NAVIGATION_RIGHT_FUNCTIONS] = LAYOUT(
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS       , KC_TRNS,                     KC_TRNS, KC_TRNS, KC_PGUP, KC_TRNS, KC_BSPC,
@@ -85,20 +84,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 				        KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
 ),
   [_SYMBOL_RIGHT_FUNCTIONS] = LAYOUT(
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_NO  , KC_TRNS,                            KC_TRNS, KC_LCBR, KC_LBRC, KC_RBRC, KC_RCBR,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-             KC_TRNS, KC_TRNS, KC_TRNS       ,                                       KC_TRNS, KC_TRNS, KC_TRNS,
-                                               KC_TRNS,                     KC_TRNS,
-					       KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS
+    KC_TRNS   , KC_TRNS   , KC_TRNS   , KC_TRNS, KC_TRNS   ,                              KC_CIRC   , KC_AMPR   , KC_ASTR   , KC_LPRN   , KC_RPRN   ,
+    RALT(KC_1), RALT(KC_2), RALT(KC_3), KC_NO  , RALT(KC_5),                              RALT(KC_6), RALT(KC_7), RALT(KC_8), RALT(KC_9), RALT(KC_0),
+    KC_TRNS   , KC_TRNS   , KC_TRNS   , KC_TRNS, KC_TRNS   ,                              KC_TRNS   , KC_TRNS   , KC_TRNS   , KC_TRNS   , KC_TRNS   ,
+                KC_TRNS   , KC_TRNS   , KC_TRNS            ,                                          KC_TRNS   , KC_TRNS   , KC_TRNS   ,
+                                                 KC_TRNS   ,                     KC_TRNS,
+					         KC_TRNS   , KC_TRNS,   KC_TRNS, KC_TRNS
 ),
   [_SYMBOL_LEFT_FUNCTIONS] = LAYOUT(
-    KC_EXLM    , KC_AT      , KC_HASH    , KC_DLR     , KC_PERC,                     KC_CIRC    , KC_AMPR, KC_ASTR    , KC_LPRN    , KC_RPRN    ,
-    RSA_T(KC_1), RSA_T(KC_2), RSA_T(KC_3), RSA_T(KC_4), RSA_T(KC_5),                 RSA_T(KC_6), KC_NO  , RSA_T(KC_8), RSA_T(KC_9), RSA_T(KC_0),
-    KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS    , KC_TRNS,                     KC_TRNS    , KC_TRNS, KC_TRNS    , KC_TRNS    , KC_TRNS    ,
-                 KC_TRNS    , KC_TRNS    , KC_TRNS    ,                                           KC_TRNS, KC_TRNS    , KC_TRNS    ,
-                                                        KC_TRNS,                     KC_TRNS,
-					                KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS
+    KC_EXLM   , KC_AT     , KC_HASH   , KC_DLR    , KC_PERC   ,                     KC_CIRC   , KC_AMPR, KC_ASTR   , KC_LPRN   , KC_RPRN   ,
+    RALT(KC_1), RALT(KC_2), RALT(KC_3), RALT(KC_4), RALT(KC_5),                     RALT(KC_6), KC_NO  , RALT(KC_8), RALT(KC_9), RALT(KC_0),
+    KC_TRNS   , KC_TRNS   , KC_TRNS   , KC_TRNS   , KC_TRNS   ,                     KC_TRNS   , KC_TRNS, KC_TRNS   , KC_TRNS   , KC_TRNS   ,
+                KC_TRNS   , KC_TRNS   , KC_TRNS   ,                                             KC_TRNS, KC_TRNS   , KC_TRNS   ,
+                                                    KC_TRNS   ,                     KC_TRNS,
+					            KC_TRNS   , KC_TRNS,   KC_TRNS, KC_TRNS
 ),
 
   [_UMLAUT_LEFT_FUNCTIONS] = LAYOUT(
@@ -126,6 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         KC_TRNS,                            KC_TRNS,
 					KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS
   ),
+
   [_NUMBER_ROW_RIGHT_FUNCTIONS] = LAYOUT(
     KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                            KC_6   , KC_7   , KC_8   , KC_9   , KC_0   ,
     KC_NO  , KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -167,53 +167,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                            KC_ESC     ,                                                        KC_TRNS    ,
 					   KC_ENTER   , KC_TRNS    ,                                   KC_NO,  KC_TRNS
   ),
-    /**     ["KC_TRNS"     , "KC_COLN"     , "KC_LT"          , "KC_GT"         , "KC_SCLN", */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
-    /**  */
-    /**      "KC_LCBR"     , "KC_RCBR"     , "KC_LPRN"        , "KC_RPRN"       , "KC_AT", */
-    /**      "KC_TRNS"     , "KC_NO"       , "KC_EQL"         , "KC_PLUS"       , "KC_PERC", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_EXLM"     , "KC_LBRC"        , "KC_RBRC"       , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
-    /**  */
-    /**      "KC_VOLD"     , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_VOLU" */
-    /**     ], */
-    /**     ["KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_F7"       , "KC_F8"          , "KC_F9"         , "KC_F10", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_NO"       , "LCTL(KC_LALT)"  , "KC_TRNS"       , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_F4"       , "KC_F5"          , "KC_F6"         , "KC_F11", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_F1"       , "KC_F2"          , "KC_F3"         , "KC_F12", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_TRNS" */
-    /**     ], */
-    /**     ["KC_PSLS"     , "KC_7"        , "KC_8"           , "KC_9"          , "KC_PPLS", */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
-    /**  */
-    /**      "KC_0"        , "KC_1"        , "KC_2"           , "KC_3"          , "KC_PMNS", */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_NO"         , "KC_TRNS", */
-    /**  */
-    /**      "KC_PAST"     , "KC_4"        , "KC_5"           , "KC_6"          , "KC_PEQL", */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_TRNS" */
-    /**     ], */
-    /**     ["KC_TRNS"     , "KC_TRNS"     , "KC_COLN"        , "KC_ESC"        , "KC_TRNS", */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_TRNS"       , "KC_DEL", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_PERC"     , "KC_SLSH"        , "KC_ENT"        , "KC_TRNS", */
-    /**      "DF(1)"       , "KC_LGUI"     , "KC_TRNS"        , "KC_TRNS"       , "KC_TRNS", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_TRNS"     , "KC_TRNS"        , "KC_EXLM"       , "KC_TRNS", */
-    /**      "DF(0)"       , "KC_TRNS"     , "RALT_T(KC_COMM)", "RCTL_T(KC_DOT)", "RESET", */
-    /**  */
-    /**      "KC_TRNS"     , "KC_TAB", */
-    /**      "KC_NO"       , "KC_TRNS" */
-    /**     ] */
-    /** ], */
 };
+/**  */
+/** uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) { */
+/**     switch (keycode) { */
+/**         case RCTL_T(KC_SLSH): */
+/**             return TAPPING_TERM * 2; */
+/**         default: */
+/**             return TAPPING_TERM; */
+/**     } */
+/** } */
+

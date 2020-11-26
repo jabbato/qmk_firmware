@@ -23,10 +23,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x3060
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    tshort
+#define DEVICE_VER      0x0090
+#define MANUFACTURER    Doehring
 // defined in subfolder
-#define DESCRIPTION     A split keyboard for the cheap makers
+#define DESCRIPTION     "ESD42 - ErgoSplit-Doehring - 42 Keys"
 
 /* mouse config */
 #define MOUSEKEY_INTERVAL       20
