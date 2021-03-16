@@ -2,40 +2,42 @@
 #include QMK_KEYBOARD_H
 
 
-#define _NORMAL_KEYBOARD		0
-#define _RIGHT_FUNCTIONS		1
-#define _LEFT_FUNCTIONS			2
-#define _RGB_FUNCTIONS			3
-#define _NUMPAD_FUNCTIONS		4
-#define _MOUSE_FUNCTIONS		5
-#define _NAVIGATION_RIGHT_FUNCTIONS	6
-#define _NAVIGATION_LEFT_FUNCTIONS	7
-#define _SYMBOL_RIGHT_FUNCTIONS		8
-#define _SYMBOL_LEFT_FUNCTIONS		9
-#define _UMLAUT_LEFT_FUNCTIONS		10
-#define _UMLAUT_RIGHT_FUNCTIONS		11
-#define _NUMBER_ROW_RIGHT_FUNCTIONS	12
-#define _NUMBER_ROW_LEFT_FUNCTIONS	13
-#define _F_KEYS_LEFT_FUNCTIONS		14
-#define _F_KEYS_RIGHT_FUNCTIONS		15
-#define _STAR_FUNCTIONS			16
+#define _NORMAL_KEYBOARD            0
+#define _RIGHT_FUNCTIONS            1
+#define _LEFT_FUNCTIONS             2
+#define _RGB_FUNCTIONS              3
+#define _NUMPAD_FUNCTIONS           4
+#define _MOUSE_FUNCTIONS            5
+#define _NAVIGATION_RIGHT_FUNCTIONS 6
+#define _NAVIGATION_LEFT_FUNCTIONS  7
+#define _SYMBOL_RIGHT_FUNCTIONS     8
+#define _SYMBOL_LEFT_FUNCTIONS      9
+#define _UMLAUT_LEFT_FUNCTIONS      10
+#define _UMLAUT_RIGHT_FUNCTIONS     11
+#define _NUMBER_ROW_RIGHT_FUNCTIONS 12
+#define _NUMBER_ROW_LEFT_FUNCTIONS  13
+#define _F_KEYS_LEFT_FUNCTIONS      14
+#define _F_KEYS_RIGHT_FUNCTIONS     15
+#define _STAR_FUNCTIONS             16
+#define _LAYERS_FUNCTIONS           17
 
-#define L_RGHT		_RIGHT_FUNCTIONS
-#define L_LFT		_LEFT_FUNCTIONS
-#define L_RGB		_RGB_FUNCTIONS
-#define L_NUM		_NUMPAD_FUNCTIONS
-#define L_MOUSE		_MOUSE_FUNCTIONS
-#define L_NAV_R		_NAVIGATION_RIGHT_FUNCTIONS
-#define L_NAV_L		_NAVIGATION_LEFT_FUNCTIONS
-#define L_SYMB_R	_SYMBOL_RIGHT_FUNCTIONS
-#define L_SYMB_L	_SYMBOL_LEFT_FUNCTIONS
-#define L_UML_L		_UMLAUT_LEFT_FUNCTIONS
-#define L_UML_R		_UMLAUT_RIGHT_FUNCTIONS
-#define L_NUM_R		_NUMBER_ROW_RIGHT_FUNCTIONS
-#define L_NUM_L		_NUMBER_ROW_LEFT_FUNCTIONS
-#define L_F_R		_F_KEYS_RIGHT_FUNCTIONS
-#define L_F_L		_F_KEYS_LEFT_FUNCTIONS
-#define L_STAR		_STAR_FUNCTIONS
+#define L_RGHT                      _RIGHT_FUNCTIONS
+#define L_LFT                       _LEFT_FUNCTIONS
+#define L_RGB                       _RGB_FUNCTIONS
+#define L_NUM                       _NUMPAD_FUNCTIONS
+#define L_MOUSE                     _MOUSE_FUNCTIONS
+#define L_NAV_R                     _NAVIGATION_RIGHT_FUNCTIONS
+#define L_NAV_L                     _NAVIGATION_LEFT_FUNCTIONS
+#define L_SYMB_R                    _SYMBOL_RIGHT_FUNCTIONS
+#define L_SYMB_L                    _SYMBOL_LEFT_FUNCTIONS
+#define L_UML_L                     _UMLAUT_LEFT_FUNCTIONS
+#define L_UML_R                     _UMLAUT_RIGHT_FUNCTIONS
+#define L_NUM_R                     _NUMBER_ROW_RIGHT_FUNCTIONS
+#define L_NUM_L                     _NUMBER_ROW_LEFT_FUNCTIONS
+#define L_F_R                       _F_KEYS_RIGHT_FUNCTIONS
+#define L_F_L                       _F_KEYS_LEFT_FUNCTIONS
+#define L_STAR                      _STAR_FUNCTIONS
+#define L_LAYERS                    _LAYERS_FUNCTIONS
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -46,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LCTL_T(KC_Z),      KC_X,              KC_C,              KC_V,               LT(L_F_R, KC_B),                 LT(L_F_R, KC_N)  , KC_M,               LALT_T(KC_COMM),    KC_DOT,          RCTL_T(KC_SLSH),
                        KC_NUBS,           KC_GRV,            KC_LALT,                                                                RALT_T(KC_EQL), LT(L_RGB, KC_RBRC), KC_MINS,
                                                                                  KC_SPC,                          KC_ENTER,
-                                                                                 KC_LSFT, KC_LGUI,     MO(L_STAR), KC_RSFT
+                                                                                 KC_LSFT, KC_LGUI,     TG(L_LAYERS), KC_RSFT
   ),
 
   [_RGB_FUNCTIONS] = LAYOUT(
@@ -167,14 +169,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                            KC_ESC     ,                                                        KC_TRNS    ,
 					   KC_ENTER   , KC_TRNS    ,                                   KC_NO,  KC_TRNS
   ),
+
+  [_LAYERS_FUNCTIONS] = LAYOUT(
+    KC_NO,       KC_NO,       KC_NO,       KC_NO,        KC_NO,                    KC_NO,       KC_NO,        KC_NO,        KC_NO,     KC_NO,
+    MO(L_NUM_R), MO(L_MOUSE), MO(L_NAV_R), MO(L_SYMB_R), MO(L_UML_R),              MO(L_UML_L), MO(L_SYMB_L), MO(L_NAV_L),  MO(L_NUM), MO(L_NUM_L),
+    KC_NO,       KC_NO,       KC_NO,       KC_NO,        MO(L_F_R),                MO(L_F_L),   KC_NO,        KC_NO,        KC_NO,     KC_NO,
+                              KC_NO,       KC_NO,        KC_NO,                    KC_NO,       MO(L_RGB),    KC_NO,
+                                                         KC_NO,                    KC_NO,
+                                                         KC_NO, KC_NO,             TG(L_LAYERS), KC_NO
+  ),
 };
-/**  */
-/** uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) { */
-/**     switch (keycode) { */
-/**         case RCTL_T(KC_SLSH): */
-/**             return TAPPING_TERM * 2; */
-/**         default: */
-/**             return TAPPING_TERM; */
-/**     } */
-/** } */
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case RCTL_T(KC_SLSH):
+            return TAPPING_TERM + TAPPING_TERM;
+        default:
+            return TAPPING_TERM;
+    }
+}
 
